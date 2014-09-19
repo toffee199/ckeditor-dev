@@ -53,6 +53,7 @@ CKEDITOR.editorConfig = function( config ) {
 		'resize,' +
 		'save,' +
 		'selectall,' +
+        'selectsecondp,' +
 		'showblocks,' +
 		'showborders,' +
 		'smiley,' +
