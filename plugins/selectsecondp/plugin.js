@@ -21,23 +21,17 @@
 
 					if ( editable.is( 'textarea' ) ) {
 						var textarea = editable.$;
+                        var p = textarea.getElementsByTag('p').getItem(1);
 
-						if ( CKEDITOR.env.ie )
-							textarea.createTextRange().execCommand( 'SelectSecondP' );
-						else {
-							textarea.selectionStart = 0;
-							textarea.selectionEnd = textarea.value.length;
-						}
+							textarea.selectionStart = textarea.getPosition(p);
+							textarea.selectionEnd = p.getText().length;
 
 						textarea.focus();
 					} else {
-						if ( editable.is( 'body' ) )
-							editor.document.$.execCommand( 'SelectSecondP', false, null );
-						else {
+
 							var range = editor.createRange();
-							range.selectNodeContents( editable );
+							range.selectNodeContents(editable.getElementsByTag('p').getItem(1));
 							range.select();
-						}
 
 						// Force triggering selectionChange (#7008)
 						editor.forceNextSelectionCheck();
