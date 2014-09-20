@@ -9,6 +9,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 	<title>Replace Textareas by Class Name &mdash; CKEditor Sample</title>
 	<script src="../ckeditor.js"></script>
 	<link rel="stylesheet" href="sample.css">
+    <style type="text/css">
+        #withoutImages{
+            border: 1px solid darkgray;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 	<h1 class="samples">
@@ -43,6 +49,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 			<input type="submit" value="Submit">
 		</p>
 	</form>
+    <h2>Content Without Images:</h2>
+    <div id="withoutImages"></div>
 	<div id="footer">
 		<hr>
 		<p>
@@ -53,5 +61,39 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 			Knabben. All rights reserved.
 		</p>
 	</div>
+    <script type="text/javascript" >
+
+        CKEDITOR.on('instanceReady', function( ev ){ // on editor ready state
+            var editor = CKEDITOR.instances['editor1'];
+
+            // redraw the div when typing is finished
+            var finishedTyping;
+
+            editor.document.on('keypress', function(){
+                if (finishedTyping)
+                    clearTimeout(finishedTyping);
+
+                finishedTyping = setTimeout(function(){
+                    fillWithoutImagesDiv(editor.getData()); // update the div
+                }, 500);
+            });
+
+            fillWithoutImagesDiv(editor.getData()); // show the div on page load
+        });
+
+
+        function fillWithoutImagesDiv(data){
+
+            document.getElementById("withoutImages").innerHTML = data;
+            var divWithoutImages = document.getElementById("withoutImages");
+            var images = divWithoutImages.getElementsByTagName("img");
+
+            for (var i = 0; i<images.length; i++) {
+                var imgToRemove = images[0];
+                imgToRemove.parentNode.removeChild(imgToRemove);
+            }
+        }
+
+    </script>
 </body>
 </html>

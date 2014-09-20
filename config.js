@@ -54,6 +54,7 @@ CKEDITOR.editorConfig = function( config ) {
 		'save,' +
 		'selectall,' +
         'selectsecondp,' +
+        'selectall2,' +
 		'showblocks,' +
 		'showborders,' +
 		'smiley,' +

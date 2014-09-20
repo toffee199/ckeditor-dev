@@ -4,34 +4,34 @@
  */
 
 /**
- * @fileOverview The "selectsecondp" plugin provides an editor command that
+ * @fileOverview The "selectall2" plugin provides an editor command that
  *               allows selecting the entire content of editable area.
  *               This plugin also enables a toolbar button for the feature.
  */
 
 ( function() {
-	CKEDITOR.plugins.add( 'selectsecondp', {
+	CKEDITOR.plugins.add( 'selectall2', {
 		lang: 'en,en-au,en-ca,en-gb,he', // %REMOVE_LINE_CORE%
-		icons: 'selectsecondp', // %REMOVE_LINE_CORE%
+		icons: 'selectall2', // %REMOVE_LINE_CORE%
 		hidpi: true, // %REMOVE_LINE_CORE%
 		init: function( editor ) {
-			editor.addCommand( 'SelectSecondP', { modes: { wysiwyg: 1, source: 1 },
+			editor.addCommand( 'selectAll2', { modes: { wysiwyg: 1, source: 1 },
 				exec: function( editor ) {
 					var editable = editor.editable();
 
 					if ( editable.is( 'textarea' ) ) {
 						var textarea = editable.$;
 
-							textarea.selectionStart = editable.getPosition(editable.getElementsByTag('p').getItem(1));
-							textarea.selectionEnd = p.getText().length;
+							textarea.selectionStart = 0;
+							textarea.selectionEnd = textarea.value.length;
 
 						    textarea.focus();
 					}
-                    else {
-
-							var range = editor.createRange();
-							range.selectNodeContents(editable.getElementsByTag('p').getItem(1));
-							range.select();
+                    else
+                    {
+                        var range = editor.createRange();
+                        range.selectNodeContents(editor.document.getBody());
+                        range.select();
 
 						// Force triggering selectionChange (#7008)
 						editor.forceNextSelectionCheck();
@@ -42,9 +42,9 @@
 				canUndo: false
 			} );
 
-			editor.ui.addButton && editor.ui.addButton( 'SelectSecondP', {
-				label: editor.lang.selectsecondp.toolbar,
-				command: 'SelectSecondP',
+			editor.ui.addButton && editor.ui.addButton( 'SelectAll2', {
+				label: editor.lang.selectall2.toolbar,
+				command: 'selectAll2',
 				toolbar: 'selection,10'
 			} );
 		}
