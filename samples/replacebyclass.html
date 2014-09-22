@@ -69,7 +69,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             // redraw the div when typing is finished
             var finishedTyping;
 
-            editor.document.on('keypress', function(){
+            editor.document.on('keyup', function(){
                 if (finishedTyping)
                     clearTimeout(finishedTyping);
 
